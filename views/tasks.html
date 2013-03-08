@@ -1,0 +1,40 @@
+@area('content', function() {
+  <div class="row">
+    <div class="span6">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#">Tasks</a></li>
+        <li><a href="docs">Documents</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <header id="header">
+        <form action="" method="POST">
+          <input class="span6" id="new-todo" style="font-size: 110%;" type="text" name="task" placeholder="What needs to be done?" autofocus>
+        </form>
+      </header>
+      <section>
+        <ul id="todo-list">
+          @collection(tasks, function(task) {
+            <li class="@(task.isDone ? "completed" : "")">
+              <div class="view">
+                <input class="toggle" type="checkbox" @(task.isDone ? "checked" : "")>
+                <a class="toggle-trigger" data-silent="true" href="tasks/@task.id/toggle"></a>
+                <label>@task.task</label>
+                <form action="tasks/@task.id" method="post">
+                  <input type="hidden" name="_method" value="delete" />
+                  <button class="destroy" type="submit"></button>
+                </form>
+              </div>
+              <form action="tasks/@task.id" method="post">
+                <input type="hidden" name="_method" value="put" />
+                <input class="edit" name="task" value="@task.task">
+              </form>
+            </li>
+          })
+        </ul>
+      </section>
+    </div>
+  </div>
+})
