@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "swac": "0.4.x",
-    "swac-couchdb": "0.3.x",
+    "swac-couchdb": "0.4.x",
     "less-middleware": "0.1.7",
     "bootstrap": "git://github.com/twitter/bootstrap.git#v2.2.2"
   }
