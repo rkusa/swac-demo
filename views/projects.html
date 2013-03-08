@@ -5,7 +5,7 @@
     <ul class="nav nav-list">
       <li class="nav-header">Projects</li>
       @collection(projects, function(p) {
-        <li class="@(project === p ? 'active' : '')"><a href="/projects/@p.id/tasks">@p.name</a></li>
+        <li class="@(project && project === p ? 'active' : '')"><a href="/projects/@p.id/tasks">@p.name</a></li>
       })
     </ul>
   </div>

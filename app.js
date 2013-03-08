@@ -12,6 +12,7 @@ var root = swac.get('/', function(app, done) {
 var projects = root.get('/projects', function(app, done) {
   app.title = 'Projects'
   app.register('projects', swac.Observable.Array(Project))
+  app.register('project', null)
   app.register('tasks', swac.Observable.Array(Task))
   app.tasks.sort(function(lhs, rhs) {
     var a = (lhs.task || '').toLowerCase()
