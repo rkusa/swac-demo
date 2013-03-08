@@ -14,5 +14,9 @@
     "swac-couchdb": "0.4.x",
     "less-middleware": "0.1.7",
     "bootstrap": "git://github.com/twitter/bootstrap.git#v2.2.2"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
   }
 }
