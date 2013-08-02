@@ -1,0 +1,8 @@
+@section content {
+  <h2 class="lead">@{project.name}</h2>
+  <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+  <ul class="nav nav-tabs" style="margin-bottom: 20px">
+    <li><a @href="project.id + '/tasks'">Tasks</a></li>
+    <li><a @href="project.id + '/docs'">Documents</a></li>
+  </ul>
+}

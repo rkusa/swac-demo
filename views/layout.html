@@ -8,31 +8,39 @@
 <body style="padding-top: 40px;">
   <div class="container">
     <div class="row">
-      <div class="span8 offset2">
-        <div class="row">
-          <div class="span8">
-            <div class="navbar">
-              <div class="navbar-inner">
-                  <a class="brand" href="/">@{title}</a>
-                  <ul class="nav pull-right">
-                    <li><a href="https://github.com/rkusa/swac-demo">Source</a></li>
-                    <li><a href="https://github.com/rkusa/swac">SWAC</a></li>
-                  </ul>
-              </div>
+      <div class="col col-lg-12">
+        <div class="navbar">
+          <div class="container">
+            <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+                
+            <a class="navbar-brand" href="/" style="max-width:300px">@{title}</a>
+            
+            <div class="nav-collapse collapse navbar-responsive-collapse">
+              <ul class="nav navbar-nav pull-right">
+                <li><a href="https://github.com/rkusa/swac-demo">Source</a></li>
+                <li><a href="https://github.com/rkusa/swac">SWAC</a></li>
+              </ul>
             </div>
           </div>
         </div>
         <div class="row">
-          @area.main()
+          @section('main')
         </div>
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="/js/zepto.min.js"></script>
+  
+  <script type="text/javascript" src="/js/jquery-2.0.2.min.js"></script>
   <script type="text/javascript" src="/js/swac.js"></script>
   <script type="text/javascript" src="/js/app.js"></script>
   <script type="text/javascript">
 		window.app = window._s = window.swac.State.deserialize(@serialize());
   </script>
+  <script type="text/javascript" src="/js/collapse.js"></script>
 </body>
 </html>

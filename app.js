@@ -4,13 +4,16 @@ var swac = require('swac')
 
 // Root Route
 var root = swac.get('/', function(app, done) {
-  app.register('title', 'SWAC Demo Application')
+  app.register('title', null)
+  app.register('location', null)
+  app.title = 'SWAC Demo Application'
   done.render('index')
 })
 
 // Projects Routes
 var projects = root.get('/projects', function(app, done) {
   app.title = 'Projects'
+  app.location = null
   app.register('projects', swac.Observable.Array(Project))
   app.register('project', null)
   app.register('tasks', swac.Observable.Array(Task))
@@ -36,18 +39,19 @@ var projects = root.get('/projects', function(app, done) {
 })
 
 var project = projects.get('/:project', function(app, done, params) {
-  var project = app.projects.find(params.project)
-  if (!project) return done.redirect('/projects')
-  app.register('project', project)
-  done()
+  app.location = null
+  app.project = app.projects.find(params.project)
+  if (!app.project) return done.redirect('/projects')
+  done.render('project', 'projects')
 })
 
 // Tasks Routes
 var tasks = project.get('/tasks', function(app, done) {
+  app.location = 'tasks'
   app.title = 'Tasks'
   Task.list('by-project', app.project.id, function(err, tasks) {
     app.tasks.reset(tasks)
-    done.render('projects', 'tasks')
+    done.render('tasks', 'projects')
   })
 }, function() {
   $('#todo-list').on('dblclick', 'li', function() {
@@ -62,8 +66,9 @@ tasks.post(function(app, done, params, body) {
     isDone: false
   })
   app.tasks.push(task)
-  task.save(function() {
-    done.redirect('/projects/' + app.project.id + '/tasks', { silent: true })
+  task.save(function(err) {
+    if (err) throw err
+    done.redirect('.', { silent: true })
   })
 }, function() {
   $('#new-todo').val('')
@@ -72,7 +77,7 @@ tasks.post(function(app, done, params, body) {
 tasks.delete('/:task', function(app, done, params) {
   var task = app.tasks.find(params.task)
   task.destroy(function() {
-    done.redirect('/projects/' + app.project.id + '/tasks', { silent: true })
+    done.redirect('..', { silent: true })
   })
 })
 
@@ -80,7 +85,7 @@ tasks.get('/:task/toggle', function(app, done, params) {
   var task = app.tasks.find(params.task)
   task.isDone = !task.isDone
   task.save(function() {
-    done.redirect('/projects/' + app.project.id + '/tasks', { silent: true })
+    done.redirect('../..', { silent: true })
   })
 })
 
@@ -88,12 +93,13 @@ tasks.put('/:task', function(app, done, params, body) {
   var task = app.tasks.find(params.task)
   task.updateAttributes(body)
   task.save(function() {
-    done.redirect('/projects/' + app.project.id + '/tasks', { silent: true })
+    done.redirect('..', { silent: true })
   })
 })
 
 // Document Routes
 var tasks = project.get('/docs', function(app, done) {
+  app.location = 'docs'
   app.title = 'Documents'
-  done.render('projects', 'docs')
+  done.render('docs', 'projects')
 })

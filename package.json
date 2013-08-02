@@ -10,10 +10,10 @@
     "start": "node server"
   },
   "dependencies": {
-    "swac": "0.4.x",
-    "swac-couchdb": "0.4.x",
+    "swac": "git://github.com/rkusa/swac.git",
+    "swac-couchdb": "git://github.com/rkusa/swac-couchdb.git",
     "less-middleware": "0.1.7",
-    "bootstrap": "git://github.com/twitter/bootstrap.git#v2.2.2"
+    "bootstrap": "git://github.com/twbs/bootstrap.git#749dc35328862896d613bfe72fc961e490037fad"
   },
   "engines": {
     "node": "0.8.x",

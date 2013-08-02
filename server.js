@@ -15,13 +15,15 @@ app.configure(function() {
 
 app.configure('development', function() {
   app.use(express.errorHandler())
-  app.use(express.logger('dev'))
+  // app.use(express.logger('dev'))
 })
 
 swac.area(__dirname + '/app')
 
 var server = module.exports = require('http').createServer(app)
 
-server.listen(app.get('port'), function() {
-  console.log("Express server listening on port " + app.get('port'))
+swac.ready(function() {
+  server.listen(app.get('port'), function() {
+    console.log("Express server listening on port " + app.get('port'))
+  })
 })
