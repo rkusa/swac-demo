@@ -17,20 +17,10 @@ var projects = root.get('/projects', function(app, done) {
   app.register('projects', swac.Observable.Array(Project))
   app.register('project', null)
   app.register('tasks', swac.Observable.Array(Task))
-  app.projects.sort(function(lhs, rhs) {
-    var a = (lhs.name || '').toLowerCase()
-      , b = (rhs.name || '').toLowerCase()
-    if (a < b) return -1
-    if (a === b) return 0
-    else return 1
-  })
-  app.tasks.sort(function(lhs, rhs) {
-    var a = (lhs.task || '').toLowerCase()
-      , b = (rhs.task || '').toLowerCase()
-    if (a < b) return -1
-    if (a === b) return 0
-    else return 1
-  })
+  
+  app.projects.sortBy('name')
+  app.tasks.sortBy('taks')
+
   Project.list(function(err, projects) {
     if (err) throw err
     app.projects.reset(projects)
